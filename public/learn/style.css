@@ -1,0 +1,16 @@
+.container {
+    display:  flex;
+    border: 2px solid black;
+    /* background-repeat: no-repeat; */
+    /* background-position: right top; */
+    /* margin-right: 200px; */
+    /* background-attachment: fixed; */
+}
+
+.child {
+
+    color: red;
+    border: 2px solid red;
+    margin: 5px;
+    text-align: center;
+}
