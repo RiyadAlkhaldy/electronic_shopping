@@ -1,15 +1,15 @@
 @extends('layouts.dashboard')
 
-@section('pagetitle','Categories')
+@section('pagetitle','products')
 @section('create')
 
 <div class="p-5">
-    <a href="{{ route('dashboard.categories.create')  }}" class="btn btn-sm btn-outline-primary mr-2">
+    <a href="{{ route('dashboard.products.create')  }}" class="btn btn-sm btn-outline-primary mr-2">
         Create
     </a>
-    <a href="{{ route('dashboard.categories.trash')  }}" class="btn btn-sm btn-outline-primary">
+    {{--  <a href="{{ route('dashboard.products.trash')  }}" class="btn btn-sm btn-outline-primary">
         Trash
-    </a>
+    </a>  --}}
 </div>
 @endsection
 
@@ -33,8 +33,8 @@
      <tr>
          <td>Id</td>
          <td>Name</td>
-         <td>Parent name</td>
-         <td>Products count</td>
+         <td>Category</td>
+         <td>Store</td>
          <td>Status</td>
          <td>Image</td>
          <td>Created At</td>
@@ -43,20 +43,21 @@
      </tr>
  </thead>
  <tbody>
-     @forelse ($categories as $category)
+     @forelse ($products as $product)
          <tr>
-             <td>{{$category->id}}</td>
-             <td><a href="{{ route('dashboard.categories.show',$category->id) }}">{{$category->name}}</a></td>
-             <td>{{$category->parent->name}}</td>
-             <td>{{$category->products_count}}</td>
-             <td>{{$category->status}}</td>
-             <td><img src="{{ asset('uploads/'.$category->image) }}" alt="" height="100"></td>
-             <td>{{$category->created_at}}</td>
+             <td>{{$product->id}}</td>
+             <td>{{$product->name}}</td>
+             <td>{{$product->category->name}}</td>
+             <td>{{$product->store->name}}</td>
+             <td>{{$product->status}}</td>
+             {{--  <td><img src="{{ asset('uploads/'.$product->image) }}" alt="" height="100"></td>  --}}
+             <td><img src="{{ $product->image }}" alt="" height="100"></td>
+             <td>{{$product->created_at}}</td>
              <td>
-                 <a href="{{ route('dashboard.categories.edit', ['category'=>$category]) }}"> Edit</a>
+                 <a href="{{ route('dashboard.products.edit', ['product'=>$product]) }}"> Edit</a>
              </td>
              <td>
-                 <form action="{{ route('dashboard.categories.destroy', ['category'=>$category]) }}" method="POST">
+                 <form action="{{ route('dashboard.products.destroy', ['product'=>$product]) }}" method="POST">
                      @csrf
                      <input type="hidden" name="_mehtode" value="delete">
                      @method('delete')
@@ -73,7 +74,7 @@
  </tbody>
 </table>
 <div  style="width: 95% "  >
-    {{$categories->withQueryString()->links()}}
+    {{$products->withQueryString()->links()}}
 
 </div>
 @endsection

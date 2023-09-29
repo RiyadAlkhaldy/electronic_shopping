@@ -18,7 +18,23 @@ class Category extends Model
 
 
 
-    public $fillable = ['parent_id','name','slug','description','image','status'];
+    public $fillable = ['parent_id','name','slug','description','image','status',
+                        // 'store_id',
+                    ];
+
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
+    public function parent(){
+        return $this->belongsTo(Category::class,'parent_id')->withDefault();
+    }
+    public function children(){
+        return $this->hasMany(Category::class,'parent_id');
+    }
+    
+
+
 
     // public static function rrr( ){
     //     $this->delete();

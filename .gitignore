@@ -4,6 +4,7 @@
 /public/hot
 /public/storage
 /public/plugins
+# /public/learn/
 /storage/*.key
 /vendor
 .env
