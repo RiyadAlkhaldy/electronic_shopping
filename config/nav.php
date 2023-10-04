@@ -9,7 +9,7 @@ return [
 [
     'icon' =>'far fa-circle nav-icon',
     'title' =>'Categories',
-    'route' =>'dashboard.categories.create',
+    'route' =>'dashboard.products.index',
 ],
 [
     'icon' =>'nav-icon fas fa-th',

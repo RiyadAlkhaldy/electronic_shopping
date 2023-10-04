@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Front\HomeController;
+use App\Http\Controllers\Front\ProductsController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,16 +19,11 @@ use Illuminate\Support\Facades\Route;
 Route::any('tailwind',function(){
     return view('tailwind');
 });
-Route::get('/', function () {
-    // $vi = app()->make('view');
-    // return $vi->view(string);
-    return view('welcome');
-});
+Route::get('/',[HomeController::class,'index'])->middleware('auth')->name('home');
+Route::get('/products',[ProductsController::class,'index'])->middleware('auth')->name('products.index');
+Route::get('/products/{product:slug}',[ProductsController::class,'show'])->middleware('auth')->name('products.show');
 
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
-
+ 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

@@ -1,4 +1,4 @@
-@extends('layouts.dashbo ard')
+@extends('layouts.dashboard')
 {{--@extends('dashboard.master')--}}
 
 @push('style')
