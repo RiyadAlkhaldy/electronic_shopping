@@ -3,10 +3,12 @@ use App\Http\Controllers\DashBoardController;
 use App\Http\Controllers\Dashboard\CategoriesController;
 use App\Http\Controllers\Dashboard\ProductController;
 use App\Http\Controllers\Dashboard\ProfileController;
+use App\Http\Middleware\CheckUserType;
 use Illuminate\Support\Facades\Route;
 
 Route::group([
-'middleware' => ['auth'],
+'middleware' => ['auth',"App\Http\Middleware\CheckUserType:admin,user"],
+// 'middleware' => ['auth','auth.type:user,admin'],
 'prefix'=>'dashboard',
 'as'=>'dashboard.'
 ],function(){
@@ -14,7 +16,8 @@ Route::group([
     Route::patch('profile/update',[ProfileController::class,'update'])->name('profile.update');
 
     Route::get('/dashboard',[DashBoardController::class,'index'])
-    ->middleware(['verified'])->name('dashboard');
+    // ->middleware(['verified'])
+    ->name('dashboard');
     Route::get('categories/trash',[CategoriesController::class,'trash'])
     ->name('categories.trash');
     Route::put('categories/{category}/restore',[CategoriesController::class,'restore'])
