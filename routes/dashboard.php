@@ -7,8 +7,8 @@ use App\Http\Middleware\CheckUserType;
 use Illuminate\Support\Facades\Route;
 
 Route::group([
-'middleware' => ['auth',"App\Http\Middleware\CheckUserType:admin,user"],
-// 'middleware' => ['auth','auth.type:user,admin'],
+// 'middleware' => ['auth',"App\Http\Middleware\CheckUserType:admin,user"],
+'middleware' => ['auth','auth.type:user,admin,super-admin'],
 'prefix'=>'dashboard',
 'as'=>'dashboard.'
 ],function(){

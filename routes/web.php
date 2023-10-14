@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Front\CartController;
 use App\Http\Controllers\Front\HomeController;
 use App\Http\Controllers\Front\ProductsController;
 use App\Http\Controllers\ProfileController;
@@ -23,7 +24,11 @@ Route::get('/',[HomeController::class,'index'])->middleware('auth')->name('home'
 Route::get('/products',[ProductsController::class,'index'])->middleware('auth')->name('products.index');
 Route::get('/products/{product:slug}',[ProductsController::class,'show'])->middleware('auth')->name('products.show');
 
- 
+
+// Route::resource('cart',  CartController::class)->middleware('auth');
+Route::resource('cart',  CartController::class)->middleware('auth');
+
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

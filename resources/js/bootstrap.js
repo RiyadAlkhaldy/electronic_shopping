@@ -6,6 +6,13 @@
 
 import axios from 'axios';
 window.axios = axios;
+import jQuery from 'jquery'; 
+// import $ from 'jQuery';
+window.$ = jQuery;
+window.$ = $;
+global.$ = global.jQuery = require('jquery');
+
+import './cart';
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
