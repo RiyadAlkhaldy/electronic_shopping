@@ -47,7 +47,7 @@ class Order extends Model
         // select max(nubmer) from orders where
         $number = Order::whereYear('created_at',$year)->max('number');
         if($number){
-            return $number =+ 1;
+            return $number + 1;
         }
         return $year . '00001';
     }

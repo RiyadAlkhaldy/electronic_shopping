@@ -20,7 +20,7 @@ class Product extends Model
         static::addGlobalScope('store', function (Builder $builder) {
             $user = Auth::user();
             if ($user && $user->store_id) {
-                $builder->where('store_id', $user->store_id) ;
+                // $builder->where('store_id', $user->store_id) ;
             }
         });
     }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Front;
 
+use App\Events\OrderCreated;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\OrderItem;
@@ -30,16 +31,15 @@ class CheckoutController extends Controller
         $request->validate([
 
         ]);
-        $items = $cart->get()->groupBy('products.store_id')->all();
-
+        $items = $cart->get()->groupBy('product.store_id')->all();
 
         DB::beginTransaction();
-
+        $order = collect();
         try {
             foreach ($items as $store_id => $cart_items) {
-
-                $order = Order::create([
-                    'store_id' =>1,
+              // dd($items);
+                $order  = Order::create([
+                    'store_id' => $store_id,
                     'user_id' =>Auth::id(),
                     'payment_method' =>'cod',
                 ]);
@@ -59,9 +59,11 @@ class CheckoutController extends Controller
                     $address['type'] = $type;
                     $order->addresses()->create($address);
                 }
+
             }
 
-            $cart->empty();
+                // event('order.created',$order,Auth::user());
+                event(new OrderCreated($order));
                 DB::commit();
 
         } catch (\Throwable $e) {
