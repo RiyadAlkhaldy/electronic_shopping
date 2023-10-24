@@ -50,7 +50,8 @@
              <td>{{$category->parent->name}}</td>
              <td>{{$category->products_count}}</td>
              <td>{{$category->status}}</td>
-             <td><img src="{{ asset('uploads/'.$category->image) }}" alt="" height="100"></td>
+             {{--  <td><img src="{{ asset('uploads/'.$category->image) }}" alt="" height="100"></td>  --}}
+             <td><img src="{{  $category->image }}" alt="" height="100"></td>
              <td>{{$category->created_at}}</td>
              <td>
                  <a href="{{ route('dashboard.categories.edit', ['category'=>$category]) }}"> Edit</a>

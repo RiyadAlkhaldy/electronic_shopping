@@ -54,7 +54,7 @@ class CartModelRepository implements CartRepository{
     public function total(): float
     {
         return $this->get()->sum(function($item){
-            return $item->quantity * $item->product->price;
+            return (float)  $item->quantity * $item->product->price;
 
         });
 

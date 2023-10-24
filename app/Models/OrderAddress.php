@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Symfony\Component\Intl\Countries;
 
 class OrderAddress extends Model
 {
@@ -13,5 +14,21 @@ class OrderAddress extends Model
         'street_address','city','state','postal_code','country'];
 
         public $timestamps = false;
+
+        public function orders(){
+
+        }
+        public function address()
+        {   
+
+        }
+        public function getNameAttribute()
+        {
+            return $this->first_name . ' '. $this->last_name;
+        }
+        public function getCountryNameAttribute()
+        {
+            return  Countries::getName($this->country);
+        }
     
 }

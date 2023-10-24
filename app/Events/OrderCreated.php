@@ -31,7 +31,17 @@ class OrderCreated
     public function broadcastOn(): array
     {
         return [
-            new PrivateChannel('channel-name'),
+            new Channel('channel-name'),
         ];
+    }
+    public function broadcastWith(): array
+    {
+        return [
+            'name' => "Riyad Alkhaldy"
+        ];
+    }
+    public function broadcastAs()
+    {
+        return "Riyad Alkhaldy";
     }
 }

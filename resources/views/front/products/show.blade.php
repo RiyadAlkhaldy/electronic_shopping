@@ -49,8 +49,9 @@
                             <h2 class="title">{{ $product->name }}</h2>
                             <p class="category"><i class="lni lni-tag"></i> Drones:<a href="javascript:void(0)">{{
                                     $product->category->name }}</a></p>
-                            <h3 class="price">{{ Currency::format($product->price, 'YER') }} @if
-                                ($product->compare_price)
+                            <h3 class="price">
+                                {{ Currency::format($product->price, 'YER')  }} 
+                                @if($product->compare_price)
                                 <span>${{ $product->compare_price }}</span>
                                 @endif
                             </h3>
