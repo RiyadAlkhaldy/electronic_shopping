@@ -8,14 +8,15 @@ use Illuminate\Support\Facades\Route;
 
 Route::group([
 // 'middleware' => ['auth',"App\Http\Middleware\CheckUserType:admin,user"],
-'middleware' => ['auth','auth.type:user,admin,super-admin'],
-'prefix'=>'dashboard',
+'middleware' => ['auth:admin'],
+// 'middleware' => ['auth','auth.type:user,admin,super-admin'],
+'prefix'=>'admin/dashboard',
 'as'=>'dashboard.'
 ],function(){
     Route::get('profile/edit',[ProfileController::class,'edit'])->name('profile.edit');
     Route::patch('profile/update',[ProfileController::class,'update'])->name('profile.update');
 
-    Route::get('/dashboard',[DashBoardController::class,'index'])
+    Route::get('/',[DashBoardController::class,'index'])
     // ->middleware(['verified'])
     ->name('dashboard');
     Route::get('categories/trash',[CategoriesController::class,'trash'])

@@ -24,4 +24,19 @@
             }
         });
     });
+    $('.add-to-cart').on('click',function(e){
+        let id = $('#quantity').val();
+        $.ajax({
+            url:"/cart",
+            method: 'post',
+            data: {
+                product_id: $(this).data('id'),
+                quantity:  id,
+                _token: csrf_token,
+            },
+            success: response => {
+                alert('product was added');
+            }
+        });
+    });
 })(jQuery);

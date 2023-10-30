@@ -52,7 +52,7 @@ class Product extends Model
     public function getImageUrlAttribute()
     {
         if(!$this->image)
-        return "";
+        return "https://via.placeholder.com/600x600.png/0077ff?text=aut";
         if(Str::startsWith($this->image, ['https://','http://']))
             return $this->image;
 
@@ -66,5 +66,7 @@ class Product extends Model
         return round( 100 - (100 * $this->price / $this->compare_price) , 1 ) ;
         // return number_format( 100 - (100 * $this->price / $this->compare_price) , 1 ) ;
     }
+
+  
 
 }

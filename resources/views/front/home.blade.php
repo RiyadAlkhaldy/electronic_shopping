@@ -212,7 +212,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
+            {{--  <div class="row">
                 <div class="col-lg-4 col-md-6 col-12">
                     <!-- Start Single Category -->
                     <div class="single-category">
@@ -226,8 +226,8 @@
                         </ul>
                         <div class="images">
                             <img src="{{ asset('assets/images/featured-categories/fetured-item-1.png') }}" alt="#">
-                            {{-- <img src="{{ asset('assets/images/featured-categories/fetured-item-1.png') }}" alt="#">
-                            --}}
+                            <img src="{{ asset('assets/images/featured-categories/fetured-item-1.png') }}" alt="#">
+                          
                         </div>
                     </div>
                     <!-- End Single Category -->
@@ -317,7 +317,7 @@
                     </div>
                     <!-- End Single Category -->
                 </div>
-            </div>
+            </div>  --}}
         </div>
     </section>
     <!-- End Features Area -->
@@ -584,7 +584,7 @@
     <!-- End Special Offer -->
 
     <!-- Start Home Product List -->
-    <section class="home-product-list section">
+    {{--  <section class="home-product-list section">
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 col-md-4 col-12 custom-responsive-margin">
@@ -724,7 +724,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section>  --}}
     <!-- End Home Product List -->
 
     <!-- Start Brands Area -->
@@ -735,7 +735,7 @@
                     <h2 class="title">Popular Brands</h2>
                 </div>
             </div>
-            <div class="brands-logo-wrapper">
+            {{--  <div class="brands-logo-wrapper">
                 <div class="tns-outer" id="tns2-ow">
                     <div class="tns-liveregion tns-visually-hidden" aria-live="polite" aria-atomic="true">slide <span
                             class="current">21 to 25</span> of 8</div>
@@ -837,7 +837,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>  --}}
         </div>
     </div>
     <!-- End Brands Area -->
@@ -1028,7 +1028,7 @@
             let diff = finaleDate - now;
             if (diff < 0) {
                 document.querySelector('.alert').style.display = 'block';
-                document.querySelector('.container').style.display = 'none';
+                {{--  document.querySelector('.container').style.display = 'none';  --}}
             }
 
             let days = Math.floor(diff / (1000 * 60 * 60 * 24));

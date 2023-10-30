@@ -128,7 +128,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     </div>
                 </li>
                 <!-- Notifications Dropdown Menu -->
-               <x-dashboard.notification-menu />
+               <x-dashboard.notification-menu count="8" />
                  
                 <li class="nav-item">
                     <a class="nav-link" data-widget="fullscreen" href="#" role="button">

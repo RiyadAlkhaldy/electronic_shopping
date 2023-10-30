@@ -4,6 +4,7 @@ use App\Http\Controllers\Front\CartController;
 use App\Http\Controllers\Front\CheckoutController;
 use App\Http\Controllers\Front\HomeController;
 use App\Http\Controllers\Front\ProductsController;
+use App\Http\Controllers\Front\Auth\TwoFactorAuthenticationController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -21,7 +22,7 @@ use Illuminate\Support\Facades\Route;
 Route::any('tailwind',function(){
     return view('tailwind');
 });
-Route::get('/',[HomeController::class,'index'])->middleware('auth')->name('home');
+Route::get('/',[HomeController::class,'index'])->middleware('auth:admin,web')->name('home');
 Route::get('/products',[ProductsController::class,'index'])->middleware('auth')->name('products.index');
 Route::get('/products/{product:slug}',[ProductsController::class,'show'])->middleware('auth')->name('products.show');
 
@@ -37,6 +38,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
-require __DIR__.'/web2.php';
+Route::get('auth/user/2fa',[TwoFactorAuthenticationController::class,'index'])
+->name('front.2fa');
+
+// require __DIR__.'/auth.php';
+// require __DIR__.'/web2.php';
 require __DIR__.'/dashboard.php';
