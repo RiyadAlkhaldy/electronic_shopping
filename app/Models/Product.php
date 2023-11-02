@@ -15,6 +15,23 @@ class Product extends Model
     protected $fillable =['name','slug','description','store_id','category_id','image',
                             'price','compare_price','options','rating','featured','status'];
 
+   protected $hidden = [
+    'image',
+    'created_at','updated_at','deleted_at',
+    ];
+    protected $appends = [
+        'image_url', 'sale_percent'
+    ];
+
+    /**
+     * Get the route key for the model.
+     */
+    // public function getRouteKeyName(): string
+    // {
+    //     return 'slug';
+    // }
+
+
     public static function booted()
     {
         static::addGlobalScope('store', function (Builder $builder) {
@@ -22,6 +39,12 @@ class Product extends Model
             if ($user && $user->store_id) {
                 $builder->where('store_id', $user->store_id) ;
             }
+        });
+        static::creating(function (Product $product) {
+            $product->slug = Str::slug($product->name);
+        });
+        static::updating(function (Product $product) {
+            $product->slug = Str::slug($product->name);
         });
     }
     public function category()
@@ -67,6 +90,42 @@ class Product extends Model
         // return number_format( 100 - (100 * $this->price / $this->compare_price) , 1 ) ;
     }
 
-  
+    public function scopeFilter(Builder $builder, $filters)
+    {
+        $options = array_merge([
+            'store_id' => null,
+            'category_id' => null,
+            'tag_id' => null,
+            'status' => 'active',
+        ], $filters);
+        $builder->when($options['store_id'],function($query ,$value){
+            $query->where('store_id', $value);
+        });
+        $builder->when($options['category_id'], function ($query,$value) {
+            $query->where('category_id', $value );
+        });
+
+        $builder->when($options['tag_id'],function($query,$value) {
+
+            $query->whereExists(function($query) use ($value){
+                $query->select(1)
+                ->from('product_tag')
+                ->whereRaw('product_id = product.id')
+                ->where('tag_id',$value);
+            });
+            // $query->whereRaw('id IN (SELECT product_id FROM product_tag WHERE tag_id = ?)',[$value]);
+            // $query->whereRaw('EXISTS (SELECT 1 FROM product_tag WHERE tag_id = ? AND product_id = product.id)',[$value]);
+
+            // $query->whereHas('tags', function($builder) use ($value){
+            //     $builder->where('tag_id', $value);
+            // });
+        });
+
+        $builder->when($options['status'], function ($query ,$value) {
+            $query->where('status', $value );
+        });
+
+
+    }
 
 }
