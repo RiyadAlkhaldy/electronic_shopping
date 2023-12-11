@@ -48,27 +48,36 @@
                             <ul class="menu-top-link">
                                 <li>
                                     <div class="select-position">
-                                        <select id="select4">
-                                            <option value="0" selected="">$ USD</option>
-                                            <option value="1">€ EURO</option>
-                                            <option value="2">$ CAD</option>
-                                            <option value="3">₹ INR</option>
-                                            <option value="4">¥ CNY</option>
-                                            <option value="5">৳ BDT</option>
-                                        </select>
+                                        <form action="{{ route('currency.store') }}" method="post" >
+                                            @csrf
+                                            <select   name="currency_code" onchange="this.form.submit()">
+                                                <option value="USD" @selected('USD' == session('currency_code'))>$ USD</option>
+                                                <option value="YAR" @selected('YAR' == session('currency_code'))> YAR</option>
+                                                <option value="EUR" @selected('EUR' == session('currency_code'))>€ EURO</option>
+                                                <option value="QAR" @selected('QAR' == session('currency_code'))>₹ QAR</option>
+                                                <option value="SAR" @selected('SAR' == session('currency_code'))>¥ SAR</option>
+                                                <option value="BDT" @selected('BDT' == session('currency_code'))>৳ BDT</option>
+                                            </select>
+                                        </form>
                                     </div>
+                                    {{-- <script>
+                                       let my_currency = document.getElementById('select_currency');
+                                       window.console.log(my_currency);
+                                       document.console.log('my_currency');
+                                    </script> --}}
                                 </li>
                                 <li>
                                     <div class="select-position">
-                                        <select id="select5">
-                                            <option value="0" selected="">English</option>
-                                            <option value="1">Español</option>
-                                            <option value="2">Filipino</option>
-                                            <option value="3">Français</option>
-                                            <option value="4">العربية</option>
-                                            <option value="5">हिन्दी</option>
-                                            <option value="6">বাংলা</option>
+                                        <form action="{{ URL::current() }}" method="get" >
+                                        <select name='lang' onchange="this.form.submit()">
+                                            <option value="en" @selected('en' == Cookie::get('lang'))>English</option>
+                                            <option value="es" @selected('es' == Cookie::get('lang'))>Español</option>
+                                            <option value="fi" @selected('fi' == Cookie::get('lang'))>Filipino</option>
+                                            <option value="fr" @selected('fr' == Cookie::get('lang'))>Français</option>
+                                            <option value="ar" @selected('ar' == Cookie::get('lang'))>العربية</option>
+                                            <option value="ch" @selected('ch' == Cookie::get('lang'))>বাংলা</option>
                                         </select>
+                                        </form>
                                     </div>
                                 </li>
                             </ul>
@@ -77,8 +86,8 @@
                     <div class="col-lg-4 col-md-4 col-12">
                         <div class="top-middle">
                             <ul class="useful-links">
-                                <li><a href="{{ route('home') }}">Home</a></li>
-                                <li><a href="about-us.html">About Us</a></li>
+                                <li><a href="{{ route('home') }}">@lang('app.home')</a></li>
+                                <li><a href="about-us.html">{{ __('app.about') }}</a></li>
                                 <li><a href="contact.html">Contact Us</a></li>
                             </ul>
                         </div>
@@ -86,31 +95,34 @@
                     <div class="col-lg-4 col-md-4 col-12">
                         <div class="top-end">
                             @auth
-                            <div class="user">
-                                <i class="lni lni-user"></i>
-                                 {{ Auth::user()->name }}
-                            </div>
-                            <ul class="user-login">
-                                <li>
-                                    <a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout').submit();">Sign Out</a>
-                                </li>
-                                <form action="{{ route('logout') }}" id="logout" method="post" style="display: none;">
-                                    @csrf
-                                </form>
-                            </ul>
+                                <div class="user">
+                                    <i class="lni lni-user"></i>
+                                    {{ Auth::user()->name }}
+                                </div>
+                                <ul class="user-login">
+                                    <li>
+                                        <a href="{{ route('logout') }}"
+                                            onclick="event.preventDefault();document.getElementById('logout').submit();">Sign
+                                            Out</a>
+                                    </li>
+                                    <form action="{{ route('logout') }}" id="logout" method="post"
+                                        style="display: none;">
+                                        @csrf
+                                    </form>
+                                </ul>
                             @else
-                            <div class="user">
-                                <i class="lni lni-user"></i>
-                                Hello
-                            </div>
-                            <ul class="user-login">
-                                <li>
-                                    <a href="{{ route('login') }}">Sign In</a>
-                                </li>
-                                <li>
-                                    <a href="{{ route('register') }}">Register</a>
-                                </li>
-                            </ul>
+                                <div class="user">
+                                    <i class="lni lni-user"></i>
+                                    Hello
+                                </div>
+                                <ul class="user-login">
+                                    <li>
+                                        <a href="{{ route('login') }}">Sign In</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('register') }}">Register</a>
+                                    </li>
+                                </ul>
                             @endauth
                         </div>
                     </div>
@@ -254,8 +266,8 @@
                                             <li class="nav-item"><a href="product-grids.html">Shop Grid</a></li>
                                             <li class="nav-item"><a href="product-list.html">Shop List</a></li>
                                             <li class="nav-item"><a href="product-details.html">shop Single</a></li>
-                                            <li class="nav-item"><a href="{{route('cart.index')}}">Cart</a></li>
-                                            <li class="nav-item"><a href="{{route('checkout')}}">Checkout</a></li>
+                                            <li class="nav-item"><a href="{{ route('cart.index') }}">Cart</a></li>
+                                            <li class="nav-item"><a href="{{ route('checkout') }}">Checkout</a></li>
                                         </ul>
                                     </li>
                                     <li class="nav-item">
@@ -314,9 +326,9 @@
 
 
 
-   {{ $breadcrumb ?? '' }}
+    {{ $breadcrumb ?? '' }}
 
-    {{$slot}}
+    {{ $slot }}
 
 
 
@@ -444,7 +456,8 @@
                         <div class="col-lg-4 col-12">
                             <div class="payment-gateway">
                                 <span>We Accept:</span>
-                                <img src="{{ asset('assets/images/footer/credit-cards-footer.png') }}" alt="#">
+                                <img src="{{ asset('assets/images/footer/credit-cards-footer.png') }}"
+                                    alt="#">
                             </div>
                         </div>
                         <div class="col-lg-4 col-12">
@@ -478,7 +491,7 @@
     </a>
 
     <!-- ========================= JS here ========================= -->
-    <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('assets/js/bootstrap.min.js') }}"></scrip>
     <script src="{{ asset('assets/js/tiny-slider.js') }}"></script>
     <script src="{{ asset('assets/js/glightbox.min.js') }}"></script>
     <script src="{{ asset('assets/js/main.js') }}"></script>

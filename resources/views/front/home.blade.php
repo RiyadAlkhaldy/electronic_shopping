@@ -1,6 +1,5 @@
 <x-form-layout>
 
-
     <x-slot:breadcrumb>
         <!-- Start Breadcrumbs -->
         <div class="breadcrumbs">
@@ -227,7 +226,7 @@
                         <div class="images">
                             <img src="{{ asset('assets/images/featured-categories/fetured-item-1.png') }}" alt="#">
                             <img src="{{ asset('assets/images/featured-categories/fetured-item-1.png') }}" alt="#">
-                          
+
                         </div>
                     </div>
                     <!-- End Single Category -->

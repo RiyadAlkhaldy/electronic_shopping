@@ -88,7 +88,7 @@ class ProductsController extends Controller
     {
          $product =  Product::destroy($id);
          $user = Auth::user();
-         dd($user->tokens);
+        //  dd($user->tokens);
         if(!$user->tokenCan('product.delete')){
             return response([
                 'message' => 'not allowed',
