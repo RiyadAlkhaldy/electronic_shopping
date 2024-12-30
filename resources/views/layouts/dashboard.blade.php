@@ -254,6 +254,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     </div>
 
     <!-- ./wrapper -->
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <!-- REQUIRED SCRIPTS -->
     {{--  @include('layouts.partials.part-scripts')  --}}
@@ -266,7 +267,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script>
         const userID = "{{ Auth::id() }}";
     </script>
-       @vite(['resources/css/app.css', 'resources/js/app.js'])
     @stack('scripts')
 
 </body>

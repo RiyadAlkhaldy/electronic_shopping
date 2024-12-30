@@ -1,4 +1,4 @@
-<x-form-layout title="CheckOut">
+<x-front-layout title="CheckOut">
     <x-slot:breadcrumb>
         <!-- Start breadcrumb -->
         <div class="breadcrumbs">
@@ -400,4 +400,4 @@
     </section>
     <!--====== Checkout Form Steps Part Ends ======-->
 
-</x-form-layout>
+</x-front-layout>

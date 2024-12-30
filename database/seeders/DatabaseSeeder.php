@@ -24,10 +24,10 @@ class DatabaseSeeder extends Seeder
         // $this->call([CategorySeeder::class]);
         // Catogory::factory()->count(3) ;
         // new
-        // \App\Models\User::factory(5)->create();
-        // Store::factory(5)->create();
-        // Category::factory(10)->create();
-        // Product::factory(100)->create();
+        \App\Models\User::factory(5)->create();
+        Store::factory(5)->create();
+        Category::factory(10)->create();
+        Product::factory(100)->create();
         //new
         Admin::factory(3)->create();
 

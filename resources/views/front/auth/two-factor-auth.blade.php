@@ -1,4 +1,4 @@
-<x-form-layout title="Two Factor Authentication">
+<x-front-layout title="Two Factor Authentication">
     <!-- Start Account Login Area -->
     <div class="account-login section">
         <div class="container">
@@ -37,4 +37,4 @@
         </div>
     </div>
     <!-- End Account Login Area -->
-</x-form-layout>
+</x-front-layout>

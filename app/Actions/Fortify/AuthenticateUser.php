@@ -12,8 +12,7 @@ class AuthenticateUser
 {
     public function authenticate($request)
     {
-        $username = $request->post(Config('fortify.
-        username'));
+        $username = $request->post(Config('fortify.username'));
         $password = $request->post('password');
         $user = Admin::where('username',$username)
         ->orWhere('email',$username)

@@ -1,4 +1,5 @@
-<html class="no-js" lang="zxx">
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
     <meta charset="utf-8">
@@ -9,11 +10,15 @@
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/images/favicon.svg') }}">
 
     <!-- ========================= CSS here ========================= -->
-    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/LineIcons.3.0.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/tiny-slider.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/glightbox.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}">
+    {{-- <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}" />
+     --}}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="{{ asset('assets/css/LineIcons.3.0.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/css/tiny-slider.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/css/glightbox.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}" />
     @stack('styles')
 </head>
 
@@ -48,9 +53,9 @@
                             <ul class="menu-top-link">
                                 <li>
                                     <div class="select-position">
-                                        <form action="{{ route('currency.store') }}" method="post" >
+                                        <form action="{{ route('currency.store') }}" method="post">
                                             @csrf
-                                            <select   name="currency_code" onchange="this.form.submit()">
+                                            <select name="currency_code" onchange="this.form.submit()">
                                                 <option value="USD" @selected('USD' == session('currency_code'))>$ USD</option>
                                                 <option value="YAR" @selected('YAR' == session('currency_code'))> YAR</option>
                                                 <option value="EUR" @selected('EUR' == session('currency_code'))>€ EURO</option>
@@ -68,16 +73,28 @@
                                 </li>
                                 <li>
                                     <div class="select-position">
-                                        <form action="{{ URL::current() }}" method="get" >
-                                        <select name='lang' onchange="this.form.submit()">
-                                            <option value="en" @selected('en' == Cookie::get('lang'))>English</option>
-                                            <option value="es" @selected('es' == Cookie::get('lang'))>Español</option>
-                                            <option value="fi" @selected('fi' == Cookie::get('lang'))>Filipino</option>
-                                            <option value="fr" @selected('fr' == Cookie::get('lang'))>Français</option>
-                                            <option value="ar" @selected('ar' == Cookie::get('lang'))>العربية</option>
-                                            <option value="ch" @selected('ch' == Cookie::get('lang'))>বাংলা</option>
-                                        </select>
+                                        <form action="{{ URL::current() }}" method="get">
+                                            <select name='lang' onchange="this.form.submit()">
+                                                @foreach (LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                                                    <option value="{{ $localeCode }}" @selected($localeCode == App::currentLocale())>
+                                                        {{ $properties['native'] }}</option>
+                                                @endforeach
+                                            </select>
                                         </form>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div  >
+                                        <ul>
+                                            @foreach (LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                                                <li>
+                                                    <a rel="alternate" hreflang="{{ $localeCode }}"
+                                                        href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+                                                        {{ $properties['native'] }}
+                                                    </a>
+                                                </li>
+                                            @endforeach
+                                        </ul>
                                     </div>
                                 </li>
                             </ul>
@@ -88,7 +105,7 @@
                             <ul class="useful-links">
                                 <li><a href="{{ route('home') }}">@lang('app.home')</a></li>
                                 <li><a href="about-us.html">{{ __('app.about') }}</a></li>
-                                <li><a href="contact.html">Contact Us</a></li>
+                                <li><a href="contact.html">{{ trans('Contact Us') }}</a></li>
                             </ul>
                         </div>
                     </div>
@@ -102,8 +119,7 @@
                                 <ul class="user-login">
                                     <li>
                                         <a href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();document.getElementById('logout').submit();">Sign
-                                            Out</a>
+                                            onclick="event.preventDefault();document.getElementById('logout').submit();">{{ trans('Sign Out') }}</a>
                                     </li>
                                     <form action="{{ route('logout') }}" id="logout" method="post"
                                         style="display: none;">
@@ -113,14 +129,14 @@
                             @else
                                 <div class="user">
                                     <i class="lni lni-user"></i>
-                                    Hello
+                                    {{ __('Hello') }}
                                 </div>
                                 <ul class="user-login">
                                     <li>
-                                        <a href="{{ route('login') }}">Sign In</a>
+                                        <a href="{{ route('login') }}">@lang('Sign in')</a>
                                     </li>
                                     <li>
-                                        <a href="{{ route('register') }}">Register</a>
+                                        <a href="{{ route('register') }}">{{ trans('Register') }}</a>
                                     </li>
                                 </ul>
                             @endauth
@@ -287,6 +303,12 @@
                                     <li class="nav-item">
                                         <a href="contact.html" aria-label="Toggle navigation">Contact Us</a>
                                     </li>
+                                    @if (Auth::user())
+                                        <li class="nav-item">
+                                            <a href="{{ route('user.settings') }}"
+                                                aria-label="Toggle navigation">Settings</a>
+                                        </li>
+                                    @endif
                                 </ul>
                             </div> <!-- navbar collapse -->
                         </nav>
@@ -491,7 +513,10 @@
     </a>
 
     <!-- ========================= JS here ========================= -->
-    <script src="{{ asset('assets/js/bootstrap.min.js') }}"></scrip>
+    {{-- <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script> --}}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+    </script>
     <script src="{{ asset('assets/js/tiny-slider.js') }}"></script>
     <script src="{{ asset('assets/js/glightbox.min.js') }}"></script>
     <script src="{{ asset('assets/js/main.js') }}"></script>

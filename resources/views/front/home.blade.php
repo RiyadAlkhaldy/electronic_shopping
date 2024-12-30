@@ -1,4 +1,4 @@
-<x-form-layout>
+<x-front-layout>
 
     <x-slot:breadcrumb>
         <!-- Start Breadcrumbs -->
@@ -1052,4 +1052,4 @@
     </script>
 
     @endpush
-</x-form-layout>
+</x-front-layout>

@@ -1,4 +1,4 @@
-<x-form-layout title="2FA Challenge">
+<x-front-layout title="2FA Challenge">
     <!-- Start Account Login Area -->
     <div class="account-login section">
         <div class="container">
@@ -40,4 +40,4 @@
         </div>
     </div>
     <!-- End Account Login Area -->
-</x-form-layout>
+</x-front-layout>

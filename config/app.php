@@ -162,6 +162,7 @@ return [
         /*
          * Package Service Providers...
          */
+        // Mcamara\LaravelLocalization\LaravelLocalizationServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -190,6 +191,8 @@ return [
     'aliases' => Facade::defaultAliases()->merge([
         // 'Example' => App\Facades\Example::class,
         'Currency'=>App\Helpers\Currency::class,
+        // 'LaravelLocalization' => Mcamara\LaravelLocalization\Facades\LaravelLocalization::class,
+
     ])->toArray(),
 
 ];

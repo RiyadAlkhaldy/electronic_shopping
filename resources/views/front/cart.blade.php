@@ -1,4 +1,4 @@
-<x-form-layout title="Cart">
+<x-front-layout title="Cart">
     <x-slot:breadcrumb>
         <!-- Start Breadcrumbs -->
         <div class="breadcrumbs">
@@ -146,4 +146,4 @@
 
 @endpush
 
-</x-form-layout>
+</x-front-layout>

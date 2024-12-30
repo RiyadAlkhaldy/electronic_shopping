@@ -1,4 +1,4 @@
-<x-form-layout :title="$product->name">
+<x-front-layout :title="$product->name">
 
     <x-slot:breadcrumb>
         <!-- Start Breadcrumbs -->
@@ -403,4 +403,4 @@
 
     @endpush
 
-</x-form-layout>
+</x-front-layout>
