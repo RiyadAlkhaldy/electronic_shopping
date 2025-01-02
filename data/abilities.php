@@ -1,9 +1,9 @@
 <?php
 
 return [
-    'categories.view' => 'View Categories',
-    'categories.create' => 'Create Categories',
-    'categories.update' => 'Update Categories',
+    'categories.view' => __('View Categories'),
+    'categories.create' => __('Create Categories'),
+    'categories.update' => __('Update Categories'),
     'categories.delete' => 'Delete Categories',
     'products.view' => 'View Products',
     'products.create' => 'Create Products',

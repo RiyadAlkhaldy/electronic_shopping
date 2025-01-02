@@ -17,13 +17,22 @@ class AuthServiceProvider extends ServiceProvider
         //
     ];
 
+    public function register(): void
+    {
+        parent::register();
+        $this->app->bind('abilities', function () {
+            return include base_path('data/abilities.php');
+        });
+    }
+
     /**
      * Register any authentication / authorization services.
      */
     public function boot(): void
     {
-        
-        foreach (config('abilities') as $ability => $ability_name) {
+        // $abilities =include base_path('data/abilities.php'); 
+        $abilities = app()->make('abilities');
+        foreach ($abilities as $ability => $ability_name) {
             Gate::define($ability, function ($user) use ($ability) {
                 return $user->hasAbility($ability);
             });

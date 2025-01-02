@@ -156,9 +156,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
             <!-- Sidebar -->
             {{--  @if (Auth::check())  --}}
-            @auth
 
-                <div class="sidebar">
+            <div class="sidebar">
+                @auth
                     <!-- Sidebar user panel (optional) -->
                     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                         <div class="image">
@@ -169,6 +169,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <a href="#" class="d-block"> {{ Auth::user()->name }}</a>
                         </div>
                     </div>
+
+                    <div class="user-panel mt-3 pb-3 mb-3 mx-3 d-flex">
+                        <a href="{{ route('logout') }}"
+                            onclick="event.preventDefault();document.getElementById('logout').submit();">{{ trans('Sign Out') }}</a>
+                    </div>
+                    <form action="{{ route('logout') }}" id="logout" method="post" style="display: none;">
+                        @csrf
+                    </form>
                 @endauth
                 {{--  @endif  --}}
 

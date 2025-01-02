@@ -4,10 +4,10 @@
 </div>
 <fieldset>
     <legend>{{ __('Abilities') }}</legend>
-    @foreach (config('abilities') as $ability_code => $ability_name)
+    @foreach (app()->make('abilities') as $ability_code => $ability_name)
         <div class="row mt-2" >
             <div class="col-md-6">
-                {{ $ability_name }}
+                {{ is_callable($ability_name) ? $ability_name() : $ability_name }}
             </div>
             <div class="col-md-2">
                 <input type="radio" name="abilities[{{ $ability_code }}]" value="allow" @checked(($role_abilities[$ability_code] ?? '') == 'allow')>

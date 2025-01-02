@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::group([
 // 'middleware' => ['auth',"App\Http\Middleware\CheckUserType:admin,user"],
-'middleware' => ['auth:admin'],
+'middleware' => ['auth:admin,web'],
 // 'middleware' => ['auth','auth.type:user,admin,super-admin'],
 'prefix'=>'admin/dashboard',
 'as'=>'dashboard.'
