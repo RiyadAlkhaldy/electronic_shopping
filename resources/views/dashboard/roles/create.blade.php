@@ -5,9 +5,9 @@
 @section('content')
     {{-- @parent --}}
     <!-- Content Wrapper. Contains page content -->
-    <form action="{{ route('dashboard.products.store') }}" method="post" class="px-3" enctype="multipart/form-data">
+    <form action="{{ route('dashboard.roles.store') }}" method="post" class="px-3" enctype="multipart/form-data">
         @csrf
-         @include('dashboard.products._form',[
+         @include('dashboard.roles._form',[
             'botton_label'=>"Create"
         ])
 

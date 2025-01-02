@@ -1,4 +1,5 @@
  <?php
+use App\Http\Controllers\Dashboard\RoleController;
 use App\Http\Controllers\DashBoardController;
 use App\Http\Controllers\Dashboard\CategoriesController;
 use App\Http\Controllers\Dashboard\ProductController;
@@ -25,6 +26,12 @@ Route::group([
     ->name('categories.restore');
     Route::delete('categories/{category}/force-delete',[CategoriesController::class,'forceDelete'])
     ->name('categories.force-delete');
-     Route::resource('categories', CategoriesController::class);
-     Route::resource('products', ProductController::class);
+    //  Route::resource('categories', CategoriesController::class);
+    //  Route::resource('products', ProductController::class);
+    //  Route::resource('roles', RoleController::class);
+     Route::resources([
+         'categories'=>CategoriesController::class,
+         'products'=>ProductController::class,
+         'roles'=>RoleController::class,
+     ]);    
 });

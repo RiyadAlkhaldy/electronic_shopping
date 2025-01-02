@@ -40,10 +40,10 @@
     <x-form.input name="compare_price" id="compare_price" type="text" value="{{$product->compare_price}}" />
 </div>
 
-<div class="form-group">
+{{-- <div class="form-group">
     <label for="tag_id">Tags  </label>
     <x-form.input name="tags" id="tag_id" type="text" :value="$tags" />
-</div>
+</div> --}}
 
 <div class="form-group">
     <label for="">Status</label>

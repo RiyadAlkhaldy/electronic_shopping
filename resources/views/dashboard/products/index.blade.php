@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 
-@section('pagetitle','products')
+@section('pagetitle','Products')
 @section('create')
 
 <div class="p-5">

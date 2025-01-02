@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Concerns\HasRole;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User;
@@ -11,7 +12,7 @@ use Laravel\Sanctum\HasApiTokens;
 class Admin extends User
 {
     // use HasFactory,Notifiable;
-    use HasApiTokens, HasFactory, Notifiable, TwoFactorAuthenticatable;
+    use HasApiTokens, HasFactory, Notifiable, TwoFactorAuthenticatable, HasRole;
 
     protected $fillable = [
         'name',

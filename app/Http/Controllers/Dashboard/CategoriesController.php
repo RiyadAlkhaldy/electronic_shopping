@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -19,16 +20,22 @@ class CategoriesController extends Controller
      */
     public function index()
     {
+        // if(Gate::denies('categories.view')){
+        //     abort(403);
+        // }
+        // if(Gate::allow('categories.view')){
+        //     abort(403);
+        // }
+        Gate::authorize('categories.view');
         $request = request();
         // $query = Category::query() ;
-        $categories = Category::
-        with( 'parent' )
-        // leftJoin('categories as parents', 'parents.id', "=", 'categories.parent_id')
-        //     ->select(['categories.*', 'parents.name as parent_name'])
+        $categories = Category::with('parent')
+            // leftJoin('categories as parents', 'parents.id', "=", 'categories.parent_id')
+            //     ->select(['categories.*', 'parents.name as parent_name'])
             // ->select(['categories.*'])
             // ->selectRaw("(select count(*) from products where products.category_id = categories.id) as products_count" )
-            ->withCount(['products as products_count'=>function($query){
-                $query->where('status','active');
+            ->withCount(['products as products_count' => function ($query) {
+                $query->where('status', 'active');
             }])
             ->filter($request)
             // ->dd();
@@ -43,6 +50,10 @@ class CategoriesController extends Controller
      */
     public function create()
     {
+        if (Gate::denies('categories.create')) {
+            abort(403);
+        }
+
         $parents = Category::all();
         $category = new Category();
         return view('dashboard.categories.create', compact('category', 'parents'));
@@ -53,6 +64,10 @@ class CategoriesController extends Controller
      */
     public function store(CategoryRequest $request)
     {
+        if (!Gate::allow('categories.store')) {
+            abort(403);
+        }
+
         $request->merge([
             'slug' => Str::slug($request->post('name'))
         ]);
@@ -67,7 +82,7 @@ class CategoriesController extends Controller
      */
     public function show(Category $category)
     {
-        return view('dashboard.categories.show',compact('category'));
+        return view('dashboard.categories.show', compact('category'));
     }
 
     /**
@@ -91,19 +106,22 @@ class CategoriesController extends Controller
      */
     public function update(CategoryRequest $request, string $id)
     {
-        $category = Category::findOrFail($id);
-        $old_image = $category->image;
-        $data = $request->except('image');
-        $new_image = $this->uploadImage($request);
-        if ($new_image) {
-            $data['image'] = $new_image;
-        }
-        $category->update($data);
 
-        if ($old_image && $new_image) {
-            Storage::disk('uploads')->delete($old_image);
+        if (!Gate::denies('categories.update')) {
+            $category = Category::findOrFail($id);
+            $old_image = $category->image;
+            $data = $request->except('image');
+            $new_image = $this->uploadImage($request);
+            if ($new_image) {
+                $data['image'] = $new_image;
+            }
+            $category->update($data);
+
+            if ($old_image && $new_image) {
+                Storage::disk('uploads')->delete($old_image);
+            }
+            return redirect()->route('dashboard.categories.index')->with('success', 'updated success');
         }
-        return redirect()->route('dashboard.categories.index')->with('success', 'updated success');
     }
 
     /**

@@ -128,8 +128,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     </div>
                 </li>
                 <!-- Notifications Dropdown Menu -->
-               <x-dashboard.notification-menu count="8" />
-                 
+                <x-dashboard.notification-menu count="8" />
+
                 <li class="nav-item">
                     <a class="nav-link" data-widget="fullscreen" href="#" role="button">
                         <i class="fas fa-expand-arrows-alt"></i>
@@ -149,8 +149,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
             <a href="index3.html" class="brand-link">
-                <img src="{{asset('dist/img/AdminLTELogo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
-                    style="opacity: .8">
+                <img src="{{ asset('dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo"
+                    class="brand-image img-circle elevation-3" style="opacity: .8">
                 <span class="brand-text font-weight-light">AdminLTE 3</span>
             </a>
 
@@ -162,7 +162,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <!-- Sidebar user panel (optional) -->
                     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                         <div class="image">
-                            <img src="{{ asset('dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2" alt="User Image">
+                            <img src="{{ asset('dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2"
+                                alt="User Image">
                         </div>
                         <div class="info">
                             <a href="#" class="d-block"> {{ Auth::user()->name }}</a>
@@ -185,7 +186,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </div>
 
                 <!-- Sidebar Menu -->
-                <x-nav/>
+                <x-nav />
                 {{--  @include('layouts.partials.part-scripts')  --}}
 
                 <!-- /.sidebar-menu -->
@@ -213,9 +214,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                @section('home')
+                                @section('breadcrumb')
                                     <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                    <li class="breadcrumb-item active"> @yield('pagetitle')</li>
                                 @show
                             </ol>
                         </div><!-- /.col -->
@@ -224,9 +224,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </div>
             <!-- /.content-header -->
 
-            @yield('create')
-
-            @yield('content')
+            <!-- Main content -->
+            <div class="content">
+                <div class="container-fluid">
+                    @yield('create')
+                    @yield('content')
+                </div><!-- /.container-fluid -->
+            </div>
+            <!-- /.content -->
 
         </div>
         <!-- /.content-wrapper -->
@@ -272,4 +277,3 @@ scratch. This page gets rid of all links and provides the needed markup only.
 </body>
 
 </html>
-
