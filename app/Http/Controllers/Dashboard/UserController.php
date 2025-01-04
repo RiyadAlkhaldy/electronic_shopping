@@ -9,6 +9,10 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(User::class );
+    }
     /**
      * Display a listing of the resource.
      */
@@ -48,7 +52,7 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(User $user)
     {
         //
     }
@@ -83,7 +87,7 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(User   $user)
+    public function destroy(User $user)
     {
         $user->delete();
         return redirect()->route('dashboard.users.index')
