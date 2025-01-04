@@ -2,12 +2,15 @@
 
 @section('pagetitle', 'Roles')
 @section('create')
-
-    <div class="p-5">
+    @can('create', 'App\Models\Role')
+        <div class="p-5">
             <a href="{{ route('dashboard.roles.create') }}" class="btn btn-sm btn-outline-primary mr-2">
                 Create
             </a>
-    </div>
+        </div>
+
+    @endcan
+
 @endsection
 
 @section('content')
@@ -28,32 +31,33 @@
                     <td>{{ $role->id }}</td>
                     <td><a href="{{ route('dashboard.roles.show', $role->id) }}">{{ $role->name }}</a></td>
                     {{-- @can('roles.update') --}}
-                        <td>
+                    <td>
+                        @can('update', $role)
                             <a href="{{ route('dashboard.roles.edit', ['role' => $role]) }}"> Edit</a>
+                        @endcan
                         </td>
-                    {{-- @endcan --}}
-                    @can('roles.delete')
+                        {{-- @endcan --}}
                         <td>
-                            <form action="{{ route('dashboard.roles.destroy', ['role' => $role]) }}"
-                                method="POST">
-                                @csrf
-                                <input type="hidden" name="_mehtode" value="delete">
-                                @method('delete')
-                                <input type="submit" value="Delete" class="btn btn-sm btn-outline-danger">
+                            @can('delete', $role)
+                                <form action="{{ route('dashboard.roles.destroy', ['role' => $role]) }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="_mehtode" value="delete">
+                                    @method('delete')
+                                    <input type="submit" value="Delete" class="btn btn-sm btn-outline-danger">
 
-                            </form>
+                                </form>
+                            @endcan
                         </td>
-                    @endcan
-                </tr>
-            @empty
-                <tr>
-                    <td colspan="4">no Products defined</td>
-                </tr>
-            @endforelse
-        </tbody>
-    </table>
-    <div style="width: 95% ">
-        {{ $roles->withQueryString()->links() }}
+                    </tr>
+                    @empty
+                        <tr>
+                            <td colspan="4">no Roles defined</td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
+            <div style="width: 95% ">
+                {{ $roles->withQueryString()->links() }}
 
-    </div>
-@endsection
+            </div>
+        @endsection

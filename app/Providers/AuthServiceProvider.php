@@ -30,6 +30,12 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        $this->registerPolicies();
+        Gate::before(function ($user, $ability) {
+            if ($user->super_admin) {
+                return true; 
+            }
+        });
         // $abilities =include base_path('data/abilities.php'); 
         $abilities = app()->make('abilities');
         foreach ($abilities as $ability => $ability_name) {
@@ -37,6 +43,9 @@ class AuthServiceProvider extends ServiceProvider
                 return $user->hasAbility($ability);
             });
         }
+
+        
+
         // Gate::define('categories.view',function($user){
         //     return true;
         // });

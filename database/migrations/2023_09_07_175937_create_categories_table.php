@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('description')->nullable();
             $table->string('image')->nullable();
             $table->enum('status',['active','inactive'])->default('active');
+            $table->softDeletes();
 
             $table->timestamps();
         });

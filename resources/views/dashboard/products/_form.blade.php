@@ -1,4 +1,12 @@
-{{ $errors }}
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 <div class="form-group">
     <label for="name">Product name </label>
     <x-form.input name="name" id="name" type="text" value="{{$product->name}}" />

@@ -7,7 +7,15 @@
 <form action="{{ route('dashboard.profile.update') }}" method="post" class="px-3" enctype="multipart/form-data">
     @csrf
     @method('patch')
-    {{ $errors }}
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
     <div class="form-row">
     <div class="col-md-6">
         <label for="first_name"> first Name </label>

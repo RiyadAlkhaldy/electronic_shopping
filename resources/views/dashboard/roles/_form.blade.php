@@ -1,3 +1,12 @@
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 <div class="form-group">
     <label for="name">Role name </label>
     <x-form.input lable="role name" class="form-control-lg" name="name" id="name" type="text" :value="$role->name" />

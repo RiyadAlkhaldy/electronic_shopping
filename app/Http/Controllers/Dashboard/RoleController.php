@@ -10,6 +10,15 @@ use Illuminate\Support\Facades\Gate;
 
 class RoleController extends Controller
 {
+
+    /**
+     * Create a new controller instance.
+     */
+    public function __construct()
+    {
+        $this->authorizeResource(Role::class);
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -25,7 +34,7 @@ class RoleController extends Controller
      */
     public function create()
     {
-        
+
         return view('dashboard.roles.create', [
             'role' => new Role(),
         ]);
@@ -50,9 +59,9 @@ class RoleController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Role $role)
     {
-        //
+        return view('dashboard.roles.show', compact('role'));
     }
 
     /**
@@ -84,9 +93,9 @@ class RoleController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Role $role)
     {
-        Role::destroy($id);
+        $role->delete();
         return redirect()->route('dashboard.roles.index')
             ->with('success', 'Role deleted successfully');
     }
