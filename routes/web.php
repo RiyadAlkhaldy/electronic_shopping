@@ -58,3 +58,4 @@ Route::group([
 // require __DIR__.'/auth.php';
 // require __DIR__.'/web2.php';
 require __DIR__ . '/dashboard.php';
+// require __DIR__ . '/fortify.php';
