@@ -13,6 +13,10 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule): void
     {
         // $schedule->command('inspire')->hourly();
+        /**
+         * Schedule the DeleteExpiredOrdersJob to run weekly.
+         */
+        $schedule->job(new \App\Jobs\DeleteExpiredOrdersJob())->weekly();
     }
 
     /**

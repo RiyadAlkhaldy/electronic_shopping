@@ -7,6 +7,7 @@
     use App\Http\Controllers\Dashboard\ProductController;
     use App\Http\Controllers\Dashboard\ProfileController;
     use App\Http\Controllers\Dashboard\UserController;
+    use App\Http\Controllers\ImportProductController;
     use App\Http\Middleware\CheckUserType;
     use Illuminate\Support\Facades\Route;
     use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
@@ -30,6 +31,10 @@
             ->name('categories.restore');
         Route::delete('categories/{category}/force-delete', [CategoriesController::class, 'forceDelete'])
             ->name('categories.force-delete');
+        Route::get('products/import', [ImportProductController::class, 'create'])
+            ->name('products.import');
+        Route::post('products/import', [ImportProductController::class, 'store']);
+            // ->name('products.store');
         //  Route::resource('categories', CategoriesController::class);
         //  Route::resource('products', ProductController::class);
         //  Route::resource('roles', RoleController::class);
