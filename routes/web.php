@@ -6,6 +6,7 @@ use App\Http\Controllers\Front\HomeController;
 use App\Http\Controllers\Front\ProductsController;
 use App\Http\Controllers\Front\Auth\TwoFactorAuthenticationController;
 use App\Http\Controllers\Front\CurrencyConverterController;
+use App\Http\Controllers\Front\PaymentController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
@@ -37,6 +38,18 @@ Route::group([
     Route::resource('cart',  CartController::class);
     Route::get('/checkout', [CheckoutController::class, 'create'])->name('checkout');
     Route::post('/checkout', [CheckoutController::class, 'store']);
+
+    Route::get('oreders/{order}/pay', [PaymentController::class, 'create'])
+        ->name('orders.payments.create');
+
+    Route::post('oreders/{order}/stripe/payment-intent', [PaymentController::class, 'createStripePaymentIntent'])
+        ->name('stripe.paymentIntent.create');
+
+    Route::get('oreders/{order}/pay/stripe/callback', [PaymentController::class, 'confirmStripePayment'])
+        ->name('stripe.return');
+
+    Route::get('stripe/test', [PaymentController::class, 'stripeTest'])
+        ->name('stripe.test');
 
     Route::middleware('auth')->group(function () {
         Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

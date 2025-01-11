@@ -67,13 +67,19 @@ class CheckoutController extends Controller
             }
 
             // event('order.created',$order,Auth::user());
-            event(new OrderCreated($order));
             DB::commit();
+            event(new OrderCreated($order));
+            // dd($order,'order created');
+
+            // return redirect()->route('orders.payments.create', ['order' => $order->id])
+                // ->with('success', 'Order has been placed successfully');
         } catch (\Throwable $e) {
 
             DB::rollback();
             throw $e;
         }
+        return redirect()->route('orders.payments.create', $order->id);
+            // ->with('success', 'Order has been placed successfully');
         // return redirect()->route('home');
 
     }

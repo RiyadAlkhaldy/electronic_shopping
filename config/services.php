@@ -35,9 +35,10 @@ return [
         'api_key'=> env('CURRENCY_CONVERTER_API_KEY'),
     ],
 
+    // stripe payment gateway
     'stripe' => [
-        'PUBLISHABLE_KEY'=> env('STRIPE_PUBLISHABLE_KEY'),
-        'SECRET_KEY' => env('STRIPE_SECRET_KEY'),
+        'publishable_key'=> env('STRIPE_PUBLISHABLE_KEY'),
+        'secret_key' => env('STRIPE_SECRET_KEY'),
     ],
 
 ];

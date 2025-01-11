@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Route;
 use Symfony\Component\HttpFoundation\Response;
 
 class SetAppLocale
@@ -29,6 +30,7 @@ class SetAppLocale
         App::setLocale($lang);
         Cookie::queue('lang', $lang,60 * 24 * 365);
 
+        // Route::current()->forgetParameter('locale');
         return $next($request);
     }
 }

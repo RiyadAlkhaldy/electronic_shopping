@@ -43,13 +43,15 @@
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="single-form form-default">
-                                                    <label>User Name</label>
                                                     <div class="row">
                                                         <div class="col-md-6 form-input form">
-                                                            <x-form.input name="addr[billing][first_name]" type="text"
-                                                                placeholder="First Name" />
+                                                            <label>First Name</label>
+                                                            <x-form.input  name="addr[billing][first_name]"
+                                                                type="text" placeholder="First Name" />
                                                         </div>
                                                         <div class="col-md-6 form-input form">
+                                                            <label>Last Name</label>
+
                                                             <x-form.input name="addr[billing][last_name]" type="text"
                                                                 placeholder="Last Name" />
                                                         </div>
@@ -78,8 +80,8 @@
                                                 <div class="single-form form-default">
                                                     <label>Mailing Address</label>
                                                     <div class="form-input form">
-                                                        <x-form.input name="addr[billing][street_address]" type="text"
-                                                            placeholder="Mailing Address" />
+                                                        <x-form.input name="addr[billing][street_address]"
+                                                            type="text" placeholder="Mailing Address" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -105,8 +107,8 @@
                                                 <div class="single-form form-default">
                                                     <label>Country</label>
                                                     <div class="form-input form">
-                                                        <x-form.selected name="addr[billing][country]"
-                                                            :options="$countries" type="text" placeholder="Country" />
+                                                        <x-form.selected name="addr[billing][country]" :options="$countries"
+                                                            type="text" placeholder="Country" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -151,12 +153,12 @@
                                                     <label>User Name</label>
                                                     <div class="row">
                                                         <div class="col-md-6 form-input form">
-                                                            <x-form.input name="addr[shipping][first_name]" type="text"
-                                                                placeholder="First Name" />
+                                                            <x-form.input name="addr[shipping][first_name]"
+                                                                type="text" placeholder="First Name" />
                                                         </div>
                                                         <div class="col-md-6 form-input form">
-                                                            <x-form.input name="addr[shipping][last_name]" type="text"
-                                                                placeholder="Last Name" />
+                                                            <x-form.input name="addr[shipping][last_name]"
+                                                                type="text" placeholder="Last Name" />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -174,8 +176,8 @@
                                                 <div class="single-form form-default">
                                                     <label>Phone Number</label>
                                                     <div class="form-input form">
-                                                        <x-form.input name="addr[shipping][phone_number]" type="text"
-                                                            placeholder="Phone Number" />
+                                                        <x-form.input name="addr[shipping][phone_number]"
+                                                            type="text" placeholder="Phone Number" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -183,8 +185,8 @@
                                                 <div class="single-form form-default">
                                                     <label>Mailing Address</label>
                                                     <div class="form-input form">
-                                                        <x-form.input name="addr[shipping][street_address]" type="text"
-                                                            placeholder="Mailing Address" />
+                                                        <x-form.input name="addr[shipping][street_address]"
+                                                            type="text" placeholder="Mailing Address" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -201,8 +203,8 @@
                                                 <div class="single-form form-default">
                                                     <label>Post Code</label>
                                                     <div class="form-input form">
-                                                        <x-form.input name="addr[shipping][postal_code]" type="text"
-                                                            placeholder="Post Code" />
+                                                        <x-form.input name="addr[shipping][postal_code]"
+                                                            type="text" placeholder="Post Code" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -233,7 +235,8 @@
                                                         Option</h6>
                                                     <div class="payment-option-wrapper">
                                                         <div class="single-payment-option">
-                                                            <input type="radio" name="shipping" checked id="shipping-1">
+                                                            <input type="radio" name="shipping" checked
+                                                                id="shipping-1">
                                                             <label for="shipping-1">
                                                                 <img src="assets/images/shipping/shipping-1.png"
                                                                     alt="Sipping">
@@ -288,48 +291,18 @@
                                     </section>
                                 </li>
                                 <li>
-                                    <h6 class="title collapsed" data-bs-toggle="collapse" data-bs-target="#collapsefive"
-                                        aria-expanded="false" aria-controls="collapsefive">Payment
+                                    <h6 class="title collapsed" data-bs-toggle="collapse"
+                                        data-bs-target="#collapsefive" aria-expanded="false"
+                                        aria-controls="collapsefive">Payment
                                         Info</h6>
                                     <section class="checkout-steps-form-content collapse" id="collapsefive"
                                         aria-labelledby="headingFive" data-bs-parent="#accordionExample">
                                         <div class="row">
                                             <div class="col-12">
                                                 <div class="checkout-payment-form">
-                                                    <div class="single-form form-default">
-                                                        <label>Cardholder Name</label>
-                                                        <div class="form-input form">
-                                                            <input type="text" placeholder="Cardholder Name">
-                                                        </div>
-                                                    </div>
-                                                    <div class="single-form form-default">
-                                                        <label>Card Number</label>
-                                                        <div class="form-input form">
-                                                            <input id="credit-input" type="text"
-                                                                placeholder="0000 0000 0000 0000">
-                                                            <img src="assets/images/payment/card.png" alt="card">
-                                                        </div>
-                                                    </div>
-                                                    <div class="payment-card-info">
-                                                        <div class="single-form form-default mm-yy">
-                                                            <label>Expiration</label>
-                                                            <div class="expiration d-flex">
-                                                                <div class="form-input form">
-                                                                    <input type="text" placeholder="MM">
-                                                                </div>
-                                                                <div class="form-input form">
-                                                                    <input type="text" placeholder="YYYY">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="single-form form-default">
-                                                            <label>CVC/CVV <span><i
-                                                                        class="mdi mdi-alert-circle"></i></span></label>
-                                                            <div class="form-input form">
-                                                                <input type="text" placeholder="***">
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                     
+                                                   
+                                                     
                                                     <div class="single-form form-default button">
                                                         <button type="submit" class="btn">pay
                                                             now</button>
@@ -344,7 +317,7 @@
                     </form>
 
                 </div>
-                
+
                 <div class="col-lg-4">
                     <div class="checkout-sidebar">
                         <div class="checkout-sidebar-coupon">
@@ -381,7 +354,7 @@
                             <div class="total-payable">
                                 <div class="payable-price">
                                     <p class="value">Subotal Price:</p>
-                                    <p class="price">$164.50</p>
+                                    <p class="price">{{ Currency::format($cart->total()) }}</p>
                                 </div>
                             </div>
                             <div class="price-table-btn button">
