@@ -7,6 +7,7 @@ use App\Http\Controllers\Front\ProductsController;
 use App\Http\Controllers\Front\Auth\TwoFactorAuthenticationController;
 use App\Http\Controllers\Front\CurrencyConverterController;
 use App\Http\Controllers\Front\PaymentController;
+use App\Http\Controllers\Front\StripeWebhooksController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
@@ -47,9 +48,15 @@ Route::group([
 
     Route::get('oreders/{order}/pay/stripe/callback', [PaymentController::class, 'confirmStripePayment'])
         ->name('stripe.return');
+    
+    Route::any('stripe/webhook',[StripeWebhooksController::class,'handle']);
 
     Route::get('stripe/test', [PaymentController::class, 'stripeTest'])
         ->name('stripe.test');
+
+
+
+
 
     Route::middleware('auth')->group(function () {
         Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
