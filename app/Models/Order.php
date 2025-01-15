@@ -26,6 +26,7 @@ class Order extends Model
     {
         return $this->belongsTo(User::class);
     }
+
     public function products()
     {
         return $this->belongsToMany(Product::class, 'order_items', 'order_id', 'product_id', 'id', 'id')
@@ -33,28 +34,35 @@ class Order extends Model
             ->withPivot(['product_name', 'price', 'quantity', 'options']);
     }
 
-     /*
+    /*
       * Get the products for this order
       */
     public function items()
     {
         return $this->hasMany(OrderItem::class, 'order_id', 'id');
     }
+
     public function addresses()
     {
         return $this->hasMany(OrderAddress::class, 'order_id', 'id');
     }
+
     public function billingAddress()
     {
         return $this->hasOne(OrderAddress::class, 'order_id', 'id')
             ->where('type', 'billing');
     }
+
     public function shippingAddress()
     {
         return $this->hasOne(OrderAddress::class, 'order_id', 'id')
             ->where('type', 'shipping');
     }
 
+    public function delivery()
+    {
+        return $this->hasOne(Delivery::class);
+    }
 
     public static function booted()
     {
