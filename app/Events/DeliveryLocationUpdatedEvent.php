@@ -32,7 +32,7 @@ class DeliveryLocationUpdatedEvent implements ShouldBroadcast
     public function broadcastOn(): array
     {
         return [
-            new  Channel('deliveries'),
+            new  PrivateChannel('deliveries.' . $this->delivery['order_id']),
         ];
     }
     public function broadcastWith()

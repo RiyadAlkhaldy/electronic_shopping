@@ -51,6 +51,7 @@ class DeliveryLocationController extends Controller
      */
     public function update(Request $request, Delivery $delivery)
     {
+        
         $request->validate([
             'lat' => ['required', 'numeric'],
             'lng' => ['required', 'numeric']
@@ -59,6 +60,7 @@ class DeliveryLocationController extends Controller
             'current_location' => DB::raw("point({$request->lat}, {$request->lng})"),
         ]);
         $delivery = Delivery::getDelivery($delivery->id);
+        
         event(new DeliveryLocationUpdatedEvent($delivery->toArray()));
         return $delivery;
     }

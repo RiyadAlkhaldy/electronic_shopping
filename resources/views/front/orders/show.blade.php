@@ -68,7 +68,7 @@
             //     map
             // });
 
-             marker = new google.maps.Marker({
+            marker = new google.maps.Marker({
                 position: loc,
                 map
             });
@@ -84,18 +84,24 @@
         Pusher.logToConsole = true;
 
         var pusher = new Pusher("{{ config('broadcasting.connections.pusher.key') }}", {
-            cluster: 'ap2'
+            cluster: 'ap2',
+            channelAuthorization: {
+                endpoint: "/broadcasting/auth",
+                headers: {
+                    "X-CSRF-Token": "{{ csrf_token() }}"
+                },
+            },
         });
 
-        var channel = pusher.subscribe('deliveries');
+        var channel = pusher.subscribe("private-deliveries.{{ $order->id }}");
         channel.bind('location-update', function(data) {
             //  alert('data');
             // alert(JSON.stringify(data));
-          //   console.log(data.delivery.lat);
-          //   console.log(JSON.stringify(data));
-          // var  ll = JSON.stringify(data);
+            //   console.log(data.delivery.lat);
+            //   console.log(JSON.stringify(data));
+            // var  ll = JSON.stringify(data);
             loc = {
-                lat:data.delivery.lat,
+                lat: data.delivery.lat,
                 lng: data.delivery.lng
             };
             console.log(loc);

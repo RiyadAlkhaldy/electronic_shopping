@@ -46,7 +46,7 @@ class OrdersController extends Controller
             DB::raw("ST_X(current_location) as lat"),
             'created_at',
             'updated_at'
-        ])->where('id', 5)->first();
+        ])->where('id', $order->id)->first();
         // return $delivery;
 
         return view('front.orders.show', compact('order', 'delivery'));
